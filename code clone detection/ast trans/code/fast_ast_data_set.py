@@ -1,0 +1,103 @@
+import torch
+from torch_geometric.data import Data
+from tqdm import tqdm
+
+from base_data_set import BaseASTDataSet
+
+
+__all__ = ['FastASTDataSet']
+
+
+class FastASTDataSet(BaseASTDataSet):
+    def __init__(self, args, data_set_name):
+        # print('Data Set Name : < Fast AST Data Set >')
+        super(FastASTDataSet, self).__init__(args, data_set_name)
+        self.max_par_rel_pos = args.max_par_rel_pos
+        self.max_bro_rel_pos = args.max_bro_rel_pos
+        self.data_type = args.data_type
+        self.final_dataset = self.convert_ast_to_edges()
+
+    def convert_ast_to_edges(self):
+        # print('building edges.')
+        data = self.ast_data
+        par_edge_data = self.matrices_data['parent']
+        bro_edge_data = self.matrices_data['brother']
+        data_type = self.data_type
+
+        edges_data = {}
+
+        def edge2list(edges, edge_type):
+            if edge_type == 'par':
+                max_rel_pos = self.max_par_rel_pos
+            if edge_type == 'bro':
+                max_rel_pos = self.max_bro_rel_pos
+            ast_len = min(len(edges), self.max_src_len)
+            start_node = -1 * torch.ones((self.max_rel_pos + 1, self.max_src_len), dtype=torch.long)
+            for key in edges.keys():
+                if key[0] < self.max_src_len and key[1] < self.max_src_len:
+                    value = edges.get(key)
+                    if value > max_rel_pos and self.ignore_more_than_k:
+                        continue
+                    value = min(value, max_rel_pos)
+                    start_node[value][key[1]] = key[0]
+
+            start_node[0][:ast_len] = torch.arange(ast_len)
+            return start_node
+
+        for i in tqdm(range(self.data_len)):
+            js = data[i]
+            idx = js['idx']
+            ast_seq = js['ast']
+            if data_type == 'sbt':
+                ast_seq = ''.join(ast_seq)
+            elif data_type == 'pot':
+                ast_seq = ' '.join(ast_seq)
+            else:
+                print('Unknown data_type')
+            par_edges = par_edge_data[i]
+            bro_edges = bro_edge_data[i]
+            # ast_seq = self.ast_data[i]
+            # nl = self.nl_data[i]
+
+            par_edge_list = edge2list(par_edges, 'par')
+            bro_edge_list = edge2list(bro_edges, 'bro')
+
+            ast_vec = self.convert_ast_to_tensor(ast_seq)
+            # nl_vec = self.convert_nl_to_tensor(nl)
+
+            # item = Data(src_seq=ast_vec,
+            #             par_edges=par_edge_list,
+            #             bro_edges=bro_edge_list)
+            #             # tgt_seq=nl_vec[:-1],
+            #             # target=nl_vec[1:])
+
+            edges_data[idx] = (ast_vec, par_edge_list, bro_edge_list)
+
+        final_dataset = []
+        for i in tqdm(range(self.data_set_len)):
+            idx1, idx2, label = self.label_data[i]
+            ast1, par1, bro1 = edges_data[idx1]
+            ast2, par2, bro2 = edges_data[idx2]
+            item = Data(ast1=ast1,par1=par1,bro1=bro1,
+                       ast2=ast2,par2=par2,bro2=bro2,
+                       idx1=idx1,idx2=idx2,label=int(label))
+            final_dataset.append(item)
+        print('{} items in final_dataset'.format(len(final_dataset)))
+
+        return final_dataset
+
+    def __getitem__(self, index):
+        # idx1, idx2, label = self.label_data[index]
+        # return self.edges_data[idx1], self.edges_data[idx2], label, idx1, idx2
+        # return self.edges_data[index], self.edges_data[index].target
+        data = self.final_dataset[index]
+        ast1 = data.ast1
+        par1 = data.par1
+        bro1 = data.bro1
+        ast2 = data.ast2
+        par2 = data.par2
+        bro2 = data.bro2
+        idx1 = data.idx1
+        idx2 = data.idx2
+        label = data.label
+        return ast1, par1, bro1, ast2, par2, bro2, idx1, idx2, label, self.final_dataset[index].label
