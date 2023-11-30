@@ -15,15 +15,17 @@ This repository contains the implementation code for the experiments in the pape
 ## Install environment
 pip install -r requirements.txt
 
-pytorch-geometric can be installed by pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://pytorch-geometric.com/whl/torch-1.9.0+cu102.html
+pytorch-geometric can be installed by pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu102.html
 
 ## Data preprocess
 Please refer to the README in data process directory.
 
 ## Run
-Run run.py in the code directory. 
+Run ``run.py`` in the code directory. 
 
 For specific parameter settings, please refer to the README under each subfolder.
 
 ## Test
-Run evaluator.py in the evaluator directory. 
+Run ``evaluator.py`` in the evaluator directory. 
+
+For more details, please refer to the README under each subfolder.

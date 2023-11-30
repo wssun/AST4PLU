@@ -454,23 +454,21 @@ def test(args, model, eval_dataset, best_threshold=0.57):
 def main():
     parser = argparse.ArgumentParser()
     ## Required parameters
-    parser.add_argument("--data_file", default="../dataset/data.jsonl", type=str,
-                        help="The input code/ast/sbt data file (a json file).")
-    parser.add_argument("--train_data_file", default="../dataset/train.txt", type=str,
-                        help="The input training data file (a txt file).")
-    parser.add_argument("--eval_data_file", default="../dataset/valid.txt", type=str)
-    parser.add_argument("--test_data_file", default="../dataset/test.txt", type=str)
+    parser.add_argument("--data_file", default="../dataset/data.jsonl", type=str, help="path to data.jsonl")
+    parser.add_argument("--train_data_file", default="../dataset/train.txt", type=str, help="path to train.txt")
+    parser.add_argument("--eval_data_file", default="../dataset/valid.txt", type=str, help="path to valid.txt")
+    parser.add_argument("--test_data_file", default="../dataset/test.txt", type=str, help="path to test.txt")
 
     parser.add_argument("--output_dir", default="./split_ast", type=str,
                         help="The output directory where checkpoints will be written.")
     parser.add_argument("--word_vocab_size", default=60000, type=int, help="vocab size of embedding")
-    parser.add_argument("--hidden_size", default=512, type=int)
-    parser.add_argument("--emb_size", default=512, type=int, help='to reload checkpoint, not used')
-    parser.add_argument("--label_size", default=5, type=int, help="number of words in label")
+    parser.add_argument("--hidden_size", default=512, type=int, help="model hidden size")
+    parser.add_argument("--emb_size", default=512, type=int, help="size of embedding vector")
+    parser.add_argument("--label_size", default=5, type=int, help="max number of words in label")
     parser.add_argument("--sample_trees", default=15, type=int, help="randomly sample k trees in every split_ast")
-    parser.add_argument("--reload", default=False, type=bool, help="Continue training from checkpoint.")    # debug
+    parser.add_argument("--reload", default=False, type=bool, help="Continue training from checkpoint if true")    # debug
 
-    parser.add_argument('--epoch', type=int, default=200)            # debug
+    parser.add_argument('--epoch', type=int, default=200, help="max training epoch")            # debug
     parser.add_argument("--train_batch_size", default=64, type=int,
                         help="Batch size per GPU/CPU for training.")      # debug
     parser.add_argument("--eval_batch_size", default=64, type=int,
@@ -500,7 +498,8 @@ def main():
                         help="Avoid using CUDA when available")
     parser.add_argument('--seed', type=int, default=42,
                         help="random seed for initialization")
-    parser.add_argument("--tokenizer_name_or_path", default='microsoft/codebert-base', type=str)  # microsoft/codebert-base     ../dataset/codebert-base
+    parser.add_argument("--tokenizer_name_or_path", default='microsoft/codebert-base', type=str,
+                        help="codebert checkpoint for weights initialization")  # microsoft/codebert-base     ../dataset/codebert-base
 
     args = parser.parse_args()
 
@@ -559,6 +558,7 @@ if __name__ == "__main__":
     proc_title = "clone_detection"
     setproctitle.setproctitle(proc_title)
 
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     print(torch.cuda.current_device())
     main()
 
