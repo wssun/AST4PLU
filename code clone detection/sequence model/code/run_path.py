@@ -1,24 +1,3 @@
-# coding=utf-8
-# Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
-# Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""
-Fine-tuning the library models for language modeling on a text file (GPT, GPT-2, BERT, RoBERTa).
-GPT and GPT-2 are fine-tuned using a causal language modeling (CLM) loss while BERT and RoBERTa are fine-tuned
-using a masked language modeling (MLM) loss.
-"""
-
 from __future__ import absolute_import, division, print_function
 
 import argparse
@@ -463,25 +442,22 @@ def main():
     parser = argparse.ArgumentParser()
 
     ## Required parameters
-    parser.add_argument("--data_file", default="../dataset/data.jsonl", type=str,
-                        help="The input code/ast/sbt data file (a json file).")
-    parser.add_argument("--train_data_file", default="../dataset/train.txt", type=str,
-                        help="The input training data file (a txt file).")
-    parser.add_argument("--eval_data_file", default="../dataset/valid.txt", type=str)
+    parser.add_argument("--data_file", default="../dataset/data.jsonl", type=str, help="path to data.jsonl")
+    parser.add_argument("--train_data_file", default="../dataset/train.txt", type=str, help="path to train.txt")
+    parser.add_argument("--eval_data_file", default="../dataset/valid.txt", type=str, help="path to valid.txt")
     parser.add_argument("--test_data_file", default="../dataset/test.txt", type=str)
-    parser.add_argument("--output_dir", default="ast_path", type=str,
-                        help="The output directory where logs and checkpoints will be written.")
+    parser.add_argument("--output_dir", default="ast_path", type=str, help="path to test.txt")
 
-    parser.add_argument("--model", default="bilstm", type=str, help="bilstm")
-    parser.add_argument('--epoch', type=int, default=200)            # debug
-    parser.add_argument("--hidden_size", default=512, type=int)
+    parser.add_argument("--model", default="bilstm", type=str, help="bilstm is the only option")
+    parser.add_argument('--epoch', type=int, default=200, help="max training epoch")            # debug
+    parser.add_argument("--hidden_size", default=512, type=int, help="model hidden size")
     parser.add_argument("--token_size", default=5, type=int,help="length of tokens")
     parser.add_argument("--path_size", default=50, type=int, help="length of paths")
     parser.add_argument("--sample_contexts", default=700, type=int, help="randomly sample k paths in every batch")
     parser.add_argument("--vocab_size", default=60000, type=int, help="vocab size of embedding")
-    parser.add_argument("--emb_size", default=512, type=int)
+    parser.add_argument("--emb_size", default=512, type=int, help="vocab size of embedding")
     parser.add_argument("--reload", default=False, type=bool,
-                        help="Continue training from checkpoint.")    # debug
+                        help="Continue training from checkpoint if true")    # debug
 
     parser.add_argument("--early_stop", default=3, type=int, help="early stop epoch number")
     parser.add_argument("--train_batch_size", default=16, type=int,
