@@ -15,7 +15,7 @@ This repository contains the implementation code for the experiments in the pape
 ## Install environment
 pip install -r requirements.txt
 
-pytorch-geometric can be installed by pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu102.html
+pytorch-geometric (used for AST-Trans) can be installed by ``pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu102.html``
 
 ## Data preprocess
 Please refer to the README in data process directory.
