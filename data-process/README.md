@@ -5,9 +5,9 @@ This directory contains files to generate AST and preprocess AST.
 
 **AST Preprocessing** - We provide the code to process AST into BFS, SBT, SBT w/o Token, AST Path, Binary Tree and Split AST in the ways decscribed in our paper.
 
-Below shows the combination of AST parsers and preprocessing methods used in our experiment.
+The table below shows the combination of AST parsers and preprocessing methods used in our experiment.
 
-|AST|BFS|SBT|SBT w/o Token|AST Path|Binary Tree|Split AST
+-|AST|BFS|SBT|SBT w/o Token|AST Path|Binary Tree|Split AST
 ---|---|---|---|---|---|---|---
 JDT|√|√|√|√|√|√|-|
 SrcML|√|-|√|-|-|-|-|
