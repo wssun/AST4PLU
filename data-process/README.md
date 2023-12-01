@@ -7,12 +7,12 @@ This directory contains files to generate AST and preprocess AST.
 
 The table below shows the combination of AST parsers and preprocessing methods used in our experiment.
 
--|AST|BFS|SBT|SBT w/o Token|AST Path|Binary Tree|Split AST
+ |AST|BFS|SBT|SBT w/o Token|AST Path|Binary Tree|Split AST
 ---|---|---|---|---|---|---|---
-JDT|√|√|√|√|√|√|-|
-SrcML|√|-|√|-|-|-|-|
-Antlr|√|-|√|-|-|-|-|
-Tree-sitter|√|-|√|-|-|-|√|
+JDT|√|√|√|√|√|√|-
+SrcML|√|-|√|-|-|-|-
+Antlr|√|-|√|-|-|-|-
+Tree-sitter|√|-|√|-|-|-|√
 
 # Install AST parsers
 The steps for installing JDT, SrcML, Antlr and Tree-sitter can be easily found online.
