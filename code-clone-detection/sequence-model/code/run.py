@@ -531,7 +531,7 @@ def main():
     parser.add_argument('--seed', type=int, default=42,
                         help="random seed for initialization")
     parser.add_argument("--model_name_or_path", default="microsoft/codebert-base", type=str,
-                        help="The model checkpoint for weights initialization.")  # microsoft/codebert-base  |  ../dataset/codebert-base
+                        help="codebert checkpoint for weights initialization")  # microsoft/codebert-base  |  ../dataset/codebert-base
 
     args = parser.parse_args()
 
