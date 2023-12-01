@@ -6,8 +6,8 @@ from base_data_set import clean_nl
 from my_ast import MyAst, PathExtract
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-data_dir', default='../dataset/', type=str)
-parser.add_argument('-max_ast_len', default=860, type=int)
+parser.add_argument('-data_dir', default='../dataset/', type=str, help="path to the dataset directory")
+parser.add_argument('-max_ast_len', default=860, type=int, help="max number of AST nodes")
 
 
 def skip_code_and_nl_with_skip_id(data_dir, output_dir, is_skipped):

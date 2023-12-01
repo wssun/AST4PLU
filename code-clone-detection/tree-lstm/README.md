@@ -1,7 +1,7 @@
 # Introduction
 This subdirectory contrains code for Child-Sum TreeLSTM and N-ary TreeLSTM.
 
-In our study, the input of sequence models can be **AST**, **Binary Tree**, **Split AST**.
+In our study, the input of TreeLSTM can be **AST**, **Binary Tree**, **Split AST**.
 
 # Data
 For how to process the BigCloneBench dataset into ASTs and preprocess the AST into Binary Tree and Split AST, please refer to the README in the data process directory.

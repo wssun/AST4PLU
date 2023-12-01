@@ -1,24 +1,3 @@
-# coding=utf-8
-# Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
-# Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""
-Fine-tuning the library models for language modeling on a text file (GPT, GPT-2, BERT, RoBERTa).
-GPT and GPT-2 are fine-tuned using a causal language modeling (CLM) loss while BERT and RoBERTa are fine-tuned
-using a masked language modeling (MLM) loss.
-"""
-
 from __future__ import absolute_import, division, print_function
 import argparse
 import glob
@@ -309,31 +288,20 @@ def test(args, model, eval_dataset, best_threshold=0):
 
 
 def main():
-    # python run.py --data_dir ../dataset/  --model_name_or_path  ../../clone-detection/dataset/codebert-base  --train_batch_size 8 --eval_batch_size 8
-    # CUDA_VISIBLE_DEVICES=0 python run.py --train_batch_size 16 --eval_batch_size 16 --epoch 2
-    # CUDA_VISIBLE_DEVICES=0 python run.py --data_dir ../dataset/  --model_name_or_path  ../../clone-detection/dataset/codebert-base  --train_batch_size 2  --eval_batch_size 2
     parser = argparse.ArgumentParser()
 
-    # Required parameters
-    # parser.add_argument("--data_file", default="../dataset/data.jsonl", type=str,
-    #                     help="The input code/ast/sbt data file (a json file).")
-    # parser.add_argument("--train_data_file", default="../dataset/train.txt", type=str,
-    #                     help="The input training data file (a txt file).")
-    # parser.add_argument("--eval_data_file", default="../dataset/valid.txt", type=str)
-    # parser.add_argument("--test_data_file", default="../dataset/test.txt", type=str)
-
-    parser.add_argument("--data_dir", default='../dataset/', type=str)   # 'D:\\ast_dataset\\bcb\\ast\jdt\\'
+    parser.add_argument("--data_dir", default='../dataset/', type=str, help="path to the dataset directory")   # 'D:\\ast_dataset\\bcb\\ast\jdt\\'
     parser.add_argument("--output_dir", default="ast-trans", type=str,
                         help="The output directory where logs and checkpoints will be written.")
     parser.add_argument("--output_res_dir", default="ast-trans", type=str,
                         help="Where model predictions will be written.")
 
-    parser.add_argument('--epoch', type=int, default=200)            # debug
-    parser.add_argument("--hidden_size", default=512, type=int)
+    parser.add_argument('--epoch', type=int, default=200, help="max training epoch")            # debug
+    parser.add_argument("--hidden_size", default=512, type=int, help="model hidden size")
     parser.add_argument("--vocab_size", default=60000, type=int, help="vocab size of embedding")
-    parser.add_argument("--emb_size", default=512, type=int)
+    parser.add_argument("--emb_size", default=512, type=int, help="size of embedding vector")
     parser.add_argument("--reload", default=False, type=bool,
-                        help="Continue training from checkpoint.")    # debug
+                        help="Continue training from checkpoint if true")    # debug
 
     parser.add_argument("--data_type", default='sbt', type=str, help="pot/sbt, corresponding to sequence data format")
     parser.add_argument("--early_stop", default=3, type=int, help="early stop epoch number")
@@ -366,11 +334,11 @@ def main():
                         help="Avoid using CUDA when available")
     parser.add_argument('--seed', type=int, default=42,
                         help="random seed for initialization")
-    parser.add_argument("--model_name_or_path", default="../dataset/codebert-base", type=str,
-                        help="The model checkpoint for weights initialization.")  # microsoft/codebert-base  |  ../dataset/codebert-base
+    parser.add_argument("--model_name_or_path", default="microsoft/codebert-base", type=str,
+                        help="codebert checkpoint for weights initialization.")  # microsoft/codebert-base  |  ../dataset/codebert-base
 
-    # ast-trans
-    parser.add_argument("--max_src_len", default=1500, type=int,help="length of pot/sbt")
+    # parameters for ast-trans
+    parser.add_argument("--max_src_len", default=1500, type=int,help="max length of pot/sbt")
     parser.add_argument('--num_heads', type=int, default=8)
     parser.add_argument('--par_heads', type=int, default=1)
     parser.add_argument('--max_rel_pos', type=int, default=7)
