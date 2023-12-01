@@ -63,18 +63,18 @@ public class JDT_for_bcb {
             	
                 Tree ast=TreeTools.stringToTreeJDT(ast_seq);
 //                tree.Test.printTree(ast, 0);
-//                TreeToJSON.toJSON(ast,0);
-//                JSONArray tree=TreeToJSON.getJSONArray();
-//                String sbt=TreeTools.treeToSBT(ast);
+                TreeToJSON.toJSON(ast,0);
+                JSONArray tree=TreeToJSON.getJSONArray();
+                String sbt=TreeTools.treeToSBT(ast);
                 String bfs=TreeTools.treeToBFS(ast);
 //                List<String> non_leaf=TreeTools.treeToNonLeaf(ast);
                 
                 JSONObject tr = new JSONObject();
 	            tr.put("idx",idx);
-//	            tr.put("func",code);
+	            tr.put("func",code);
 	            
-//	            tr.put("sbt",sbt);
-//	            tr.put("ast",tree);
+	            tr.put("sbt",sbt);
+	            tr.put("ast",tree);
 	            tr.put("bfs",bfs);
 //	            tr.put("labels",non_leaf);
 	            bw.write(tr.toString()+"\n");

@@ -72,13 +72,13 @@ public class JDT_for_csn {
 
 //            	System.out.println(idx);
                 
-//                Tree ast=TreeTools.stringToTreeJDT(ast_seq);
-//	            TreeToJSON.toJSON(ast,0);
-//	            JSONArray tree=TreeToJSON.getJSONArray();
+                Tree ast=TreeTools.stringToTreeJDT(ast_seq);
+	            TreeToJSON.toJSON(ast,0);
+	            JSONArray tree=TreeToJSON.getJSONArray();
 //	            List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
 //	            List<String> non_leaf=TreeTools.treeToNonLeaf(ast);
-//                String sbt=TreeTools.treeToSBT(ast);
-//                String bfs=TreeTools.treeToBFS(ast);
+                String sbt=TreeTools.treeToSBT(ast);
+                String bfs=TreeTools.treeToBFS(ast);
                 
                 
                 JSONObject tr = new JSONObject();
@@ -93,8 +93,9 @@ public class JDT_for_csn {
 	            tr.put("docstring_tokens",docstring_tokens);
 	            
 //	            tr.put("labels",non_leaf);
-//	            tr.put("ast",tree);
-//	            tr.put("bfs",bfs);
+	            tr.put("ast",tree);
+	            tr.put("bfs",bfs);
+	            tr.put("sbt",sbt);
 	            bw.write(tr.toString()+"\n");
             }
         } catch (Exception e) {
