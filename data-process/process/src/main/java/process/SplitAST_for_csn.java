@@ -17,7 +17,7 @@ import utils.TreeToJSON;
 import utils.TreeTools;
 
 public class SplitAST_for_csn {
-	private static String FILE_PATH="D:\\ast_dataset\\csn\\split_ast\\train_ast.jsonl";
+	private static String AST_FILE_PATH="D:\\ast_dataset\\csn\\split_ast\\train_ast.jsonl";
 	private static String JSON_FILE_PATH="D:\\ast_dataset\\csn\\split_ast\\train.jsonl";
 	
 	// use Tree-sitter
@@ -29,7 +29,7 @@ public class SplitAST_for_csn {
         FileWriter fileWriter = null;
         BufferedWriter bw = null;
         try {
-            fr = new FileReader(FILE_PATH);
+            fr = new FileReader(AST_FILE_PATH);
             br = new BufferedReader(fr);
             
             jsonFile = new File(JSON_FILE_PATH);

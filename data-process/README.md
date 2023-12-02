@@ -23,6 +23,7 @@ The table below shows the explanation of some unified parameters.
 |``TEMP_CODE_PATH``|path to a temporary file without suffix, such as "D:\\ast_dataset\\csn\\func_sbt_ast\\srcml\\temp"|
 |``TEMP_AST_PATH``|path to a xml file, such as "D:\\ast_dataset\\csn\\func_sbt_ast\\srcml\\ast.xml"|
 |``AST_FILE_PATH`` or ``ast_file_path``|path to a intermediate data file (a json file) generated using Tree-sitter|
+|``SPLIT_FILE_PATH`` or ``split_file_path``|path to a intermediate data file (a json file) used when generating Split AST|
 |``MAX_SIZE``|the max number of data in the dataset|
 
 # Install AST parsers
@@ -90,7 +91,8 @@ Specific file names are shown in the Table below where {DATASET} can be ``bcb``(
 |Tree-sitter(Java)|Treesitter_for_{DATASET}.java|-|Treesitter_for_{DATASET}.java|-|-|-|SplitAST_for_{DATASET}.java|
 
 ## Original AST, SBT
-Run the corresponding file.
+1. Run ``process()`` function in process.py
+2. Run Treesitter_for_{DATASET}.java.
 
 ## Binary Tree
 Similar to AST, the code for processing BigCloneBench and CodeSearchNet into Binary Tree is ``Treesitter_for_bcb.java`` and ``Treesitter_for_csn.java`` respectively.
@@ -116,7 +118,7 @@ into
                 BinaryToJSON.toJSON(bn,0);
                 JSONArray tree=BinaryToJSON.getJSONArray();
 ```
-and comment out the sentence ``tr.put("sbt",sbt);`
+and comment out the sentence ``tr.put("sbt",sbt);``
 
 Similarly, in ``Treesitter_for_csn.java``, you have to change the following code
 ```
@@ -124,23 +126,23 @@ Similarly, in ``Treesitter_for_csn.java``, you have to change the following code
                 TreeToJSON.toJSON(ast,0);
                 JSONArray tree=TreeToJSON.getJSONArray();
                 List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
-//              List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
-//        		BinaryTree bn=TreeTools.TreeToBinary(ast);
-//              BinaryToJSON.toJSON(bn,0);
-//              JSONArray tree=BinaryToJSON.getJSONArray();
+//                 List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
+//        		   BinaryTree bn=TreeTools.TreeToBinary(ast);
+//                 BinaryToJSON.toJSON(bn,0);
+//                 JSONArray tree=BinaryToJSON.getJSONArray();
 ```
 into
 ```
                 Tree ast=TreeTools.stringToTree(ast_seq);
-//              TreeToJSON.toJSON(ast,0);
-//              JSONArray tree=TreeToJSON.getJSONArray();
-//              List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
-//              List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
+//                 TreeToJSON.toJSON(ast,0);
+//                 JSONArray tree=TreeToJSON.getJSONArray();
+//                 List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
+//                 List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
        		    BinaryTree bn=TreeTools.TreeToBinary(ast);
                 BinaryToJSON.toJSON(bn,0);
                 JSONArray tree=BinaryToJSON.getJSONArray();
 ```
-and comment out the sentence ``tr.put("sbt",sbt);`
+and comment out the sentence ``tr.put("sbt",sbt);``
 
 ## Split AST
 
@@ -148,15 +150,15 @@ and comment out the sentence ``tr.put("sbt",sbt);`
 You can follow the steps in the comment in ``split_ast.py`` to get Split Code.
 
 ### Get Split AST
-TODO
-
+1. Run ``process_split_ast()`` function in process.py
+2. Run SplitAST_for_{DATASET}.java.
 
 
 # RQ1: Differences among ASTs
 The code is in ``./process/src/main/java/statistic`` directory. Specific file names are shown in the Table below.
 
 |AST Parser|File Name|
-|---|---|---|---|---|---|---|---|
+|---|---|
 |JDT|JDT.java|
 |SrcML|SrcML.java|
 |Antlr|Antlr.java|
