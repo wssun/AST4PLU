@@ -3,9 +3,6 @@ import GenerateAST
 import sys
 sys.setrecursionlimit(100000)
 
-language = 'java'
-print('start...')
-
 
 def clean_ast(ast):
     return ast[62:-6]
@@ -51,63 +48,70 @@ def clean_split_ast(ast):
         return ast[pos:]+')'*cnt_brk
 
 
-idx = 0
-# filtered = [9321,
-# 9322,
-# 9323,
-# 9324,
-# 9325,
-# 9326,
-# 9327,
-# 9328,
-# 9463,
-# 9464,
-# 9465,
-# 9466,
-# 9467,
-# 9468,
-# 9469,
-# 9527,
-# 9535,
-# 9637,
-# 47197,
-# 131530]
-# other
-with open("D:\\ast_dataset\csn\original\\train.jsonl", encoding='UTF-8') as f:
-    with open("D:\\ast_dataset\\csn\\binary_tree\\train_ast.jsonl", 'w', encoding='UTF-8') as f1:
-        for line in f:
-            idx = idx + 1
-            # if idx in filtered:
-            #     continue
-            line = line.strip()
-            js = json.loads(line)
-            code = js['code']
-            # code = js['func']
-            ast = GenerateAST.get_ast(code, language)
-            js['ast'] =clean_ast(ast)
-            if(idx % 10000 == 0):
-                print(js['ast'])
-            f1.write(json.dumps(js) + '\n')
-print(idx)
-print('finish')
+def process(file_path, ast_file_path, language):
+    idx = 0
+    # filtered = [9321,
+    # 9322,
+    # 9323,
+    # 9324,
+    # 9325,
+    # 9326,
+    # 9327,
+    # 9328,
+    # 9463,
+    # 9464,
+    # 9465,
+    # 9466,
+    # 9467,
+    # 9468,
+    # 9469,
+    # 9527,
+    # 9535,
+    # 9637,
+    # 47197,
+    # 131530]
+    # other
+    with open(file_path, encoding='UTF-8') as f:
+        with open(ast_file_path, 'w', encoding='UTF-8') as f1:
+            for line in f:
+                idx = idx + 1
+                # if idx in filtered:
+                #     continue
+                line = line.strip()
+                js = json.loads(line)
+                code = js['code']    # CodeSearchNet
+                # code = js['func']   # BigCloneBench
+                ast = GenerateAST.get_ast(code, language)
+                js['ast'] =clean_ast(ast)
+                if(idx % 10000 == 0):
+                    print(js['ast'])
+                f1.write(json.dumps(js) + '\n')
+    print(idx)
+    print('finish')
 
 
 
+def process_split_ast(file_path, ast_file_path, language):
+    cnt = 0
+    with open(file_path, encoding='UTF-8') as f:
+        with open(ast_file_path, 'w', encoding='UTF-8') as f1:
+            for line in f:
+                line = line.strip()
+                js = json.loads(line)
+                codes = js['func']
+                asts = []
+                for code in codes:
+                    ast = GenerateAST.get_ast(code, language)
+                    asts.append(clean_split_ast(ast))
+                js['asts'] = asts
+                f1.write(json.dumps(js) + '\n')
+                cnt = cnt + 1
+    print(cnt)
+    print('finish')
 
-# split ast
-# cnt = 0
-# with open("D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl", encoding='UTF-8') as f:
-#     with open("D:\\ast_dataset\\bcb\\split_ast\\data_ast.jsonl", 'w', encoding='UTF-8') as f1:
-#         for line in f:
-#             line = line.strip()
-#             js = json.loads(line)
-#             codes = js['func']
-#             asts = []
-#             for code in codes:
-#                 ast = GenerateAST.get_ast(code, language)
-#                 asts.append(clean_split_ast(ast))
-#             js['asts'] = asts
-#             f1.write(json.dumps(js) + '\n')
-#             cnt = cnt + 1
-# print(cnt)
-# print('finish')
+
+if __name__ == '__main__':
+    language = 'java'
+    print('start...')
+    process(file_path="D:\\ast_dataset\csn\original\\train.jsonl", ast_file_path="D:\\ast_dataset\\csn\\binary_tree\\train_ast.jsonl", language=language)
+    process_split_ast(file_path="D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl", ast_file_path="D:\\ast_dataset\\bcb\\split_ast\\data_ast.jsonl", language=language)

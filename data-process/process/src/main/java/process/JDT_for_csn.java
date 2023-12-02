@@ -61,6 +61,7 @@ public class JDT_for_csn {
                 String ast_seq="";
                 try {
                 	ast_seq=GenerateAST.getAST(code);
+//                	    ast_seq=GenerateAST.getMaskedAST(code);
                 }
                 catch(Exception e){
                 	success=false;

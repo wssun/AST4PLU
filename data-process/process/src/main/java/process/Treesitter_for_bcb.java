@@ -18,7 +18,7 @@ import utils.TreeToJSON;
 import utils.TreeTools;
 
 public class Treesitter_for_bcb {
-	private static String FILE_PATH="D:\\ast_dataset\\bcb\\binary_tree\\treesitter\\ast.jsonl";
+	private static String AST_FILE_PATH="D:\\ast_dataset\\bcb\\binary_tree\\treesitter\\ast.jsonl";
 	private static String JSON_FILE_PATH="D:\\ast_dataset\\bcb\\binary_tree\\treesitter\\data.jsonl";
 	
 	public static void main(String[] args) throws IOException {
@@ -30,7 +30,7 @@ public class Treesitter_for_bcb {
         FileWriter fileWriter = null;
         BufferedWriter bw = null;
         try {
-            fr = new FileReader(FILE_PATH);
+            fr = new FileReader(AST_FILE_PATH);
             br = new BufferedReader(fr);
             
             jsonFile = new File(JSON_FILE_PATH);
@@ -50,18 +50,18 @@ public class Treesitter_for_bcb {
                 if(idx == 10000832 || idx == 21571495)continue;
             	
                 Tree ast=TreeTools.stringToTree(ast_seq);
-//                TreeToJSON.toJSON(ast,0);
-//                JSONArray tree=TreeToJSON.getJSONArray();
-//                String sbt=TreeTools.treeToSBT(ast);
-//                List<String> non_leaf=TreeTools.treeToNonLeaf(ast);
-        		BinaryTree bn=TreeTools.TreeToBinary(ast);
-                BinaryToJSON.toJSON(bn,0);
-                JSONArray tree=BinaryToJSON.getJSONArray();
+                TreeToJSON.toJSON(ast,0);
+                JSONArray tree=TreeToJSON.getJSONArray();
+                String sbt=TreeTools.treeToSBT(ast);
+//              List<String> non_leaf=TreeTools.treeToNonLeaf(ast);
+//         		BinaryTree bn=TreeTools.TreeToBinary(ast);
+//              BinaryToJSON.toJSON(bn,0);
+//              JSONArray tree=BinaryToJSON.getJSONArray();
                 
                 JSONObject tr = new JSONObject();
 	            tr.put("idx",Integer.toString(idx));
 	            
-//	            tr.put("sbt",sbt);
+	            tr.put("sbt",sbt);
 	            tr.put("ast",tree);
 //	            tr.put("labels",non_leaf);
 	            bw.write(tr.toString()+"\n");

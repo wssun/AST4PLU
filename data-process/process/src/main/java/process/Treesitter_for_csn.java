@@ -19,7 +19,7 @@ import utils.TreeTools;
 
 public class Treesitter_for_csn {
 	private static String type="valid";
-	private static String FILE_PATH="D:\\ast_dataset\\csn\\rq4\\ast\\"+type+"_ast.jsonl";
+	private static String AST_FILE_PATH="D:\\ast_dataset\\csn\\rq4\\ast\\"+type+"_ast.jsonl";
 	private static String JSON_FILE_PATH="D:\\ast_dataset\\csn\\rq4\\ast\\"+type+".jsonl";
 	
 	public static void main(String[] args) throws IOException {
@@ -30,7 +30,7 @@ public class Treesitter_for_csn {
         FileWriter fileWriter = null;
         BufferedWriter bw = null;
         try {
-            fr = new FileReader(FILE_PATH);
+            fr = new FileReader(AST_FILE_PATH);
             br = new BufferedReader(fr);
             
             jsonFile = new File(JSON_FILE_PATH);
@@ -60,13 +60,13 @@ public class Treesitter_for_csn {
                 String ast_seq=lineJson.getString("ast");
             	
                 Tree ast=TreeTools.stringToTree(ast_seq);
-                TreeToJSON.toJSON(ast,0);
-                JSONArray tree=TreeToJSON.getJSONArray();
-//                List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
-//                List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
-//        		BinaryTree bn=TreeTools.TreeToBinary(ast);
-//                BinaryToJSON.toJSON(bn,0);
-//                JSONArray tree=BinaryToJSON.getJSONArray();
+//              TreeToJSON.toJSON(ast,0);
+//              JSONArray tree=TreeToJSON.getJSONArray();
+//              List<String> sbt=TreeTools.treeToSBTArrayBrackets(ast);
+//              List<String> nonleaf=TreeTools.treeToNonLeaf(ast);
+       		    BinaryTree bn=TreeTools.TreeToBinary(ast);
+                BinaryToJSON.toJSON(bn,0);
+                JSONArray tree=BinaryToJSON.getJSONArray();
                 
                 JSONObject tr = new JSONObject();
 	            tr.put("repo",repo);
@@ -79,7 +79,7 @@ public class Treesitter_for_csn {
 	            tr.put("docstring",docstring);
 	            tr.put("docstring_tokens",docstring_tokens);
 	            
-//	            tr.put("sbt",sbt);
+	            tr.put("sbt",sbt);
 	            tr.put("ast",tree);
 //                tr.put("labels",nonleaf);
 	            bw.write(tr.toString()+"\n");

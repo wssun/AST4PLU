@@ -14,7 +14,7 @@ import tree.Tree;
 import utils.TreeTools;
 
 public class TreeSitter {
-	private static String FILE_PATH="D:\\ast_dataset\\csn\\binary_tree\\train_ast.jsonl";  //from original/train.jsonl
+	private static String AST_FILE_PATH="D:\\ast_dataset\\csn\\binary_tree\\train_ast.jsonl";  //from original/train.jsonl
 	private static int MAX_SIZE=170000;
 	
 	public static void main(String[] args) throws IOException {
@@ -27,7 +27,7 @@ public class TreeSitter {
         FileReader fr = null;
         BufferedReader br = null;
         try {
-            fr = new FileReader(FILE_PATH);
+            fr = new FileReader(AST_FILE_PATH);
             br = new BufferedReader(fr);
             
             System.out.println("start");

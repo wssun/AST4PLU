@@ -139,7 +139,7 @@ def skip_empty_node(nodes):
                         nodes[i] += [node_id]
 
 
-def process_cfg(cfg_dir, java_dir, final_cfg_dir):   # read source code by line
+def process_cfg_bcb(cfg_dir, java_dir, final_cfg_dir):   # read source code by line
     cfg_file_list = os.listdir(cfg_dir)
     os.chdir(cfg_dir)
     for item in tqdm(cfg_file_list):
@@ -228,7 +228,7 @@ def process_cfg_csn(cfg_dir, java_dir, final_cfg_dir):   # read source code by l
             cfg_file.close()
 
 
-def add_head(code_split_dir, source_path, new_split_path):  # The method header is also added to the code snippet
+def add_head_bcb(code_split_dir, source_path, new_split_path):  # The method header is also added to the code snippet
     code_split_list = os.listdir(code_split_dir)
     source_code = {}
     with open(source_path, encoding='UTF-8') as f1:
@@ -395,22 +395,20 @@ def process_split_code(code_split_path, final_code_split_file):
 if __name__ == "__main__":
     csn_file = 'test'
 
-    # 和BAST不一样的地方在于去除了注释
+    # 1. Run data2java function
     # data2java_bcb('D:\\ast_dataset\\bcb\\func\\data.jsonl','D:\\ast_dataset\\bcb\\split_ast\\files\\')
     # data2java_csn('D:\\ast_dataset\\csn\\original\\{}.jsonl'.format(csn_file), 'D:\\ast_dataset\\csn\\split_ast\\files\\{}\\'.format(csn_file))
 
-    # Javaformat.java  Jalopy通过maven添加
-    # 省略这步，不然生成的split code有很多不好生成AST
-
-    #2. open 'D:\\ast_dataset\\bcb\\split_ast\\files\\' in scitools understand to get ‘D:\ast_dataset\bcb\split_ast\files.udb’
+    # 2. open 'D:\\ast_dataset\\bcb\\split_ast\\files\\' in scitools understand to get ‘D:\ast_dataset\bcb\split_ast\files.udb’
     #   如果已有‘D:\ast_dataset\bcb\split_ast\files.udb’文件可以直接打开，会自己更新
 
-    #3. run in cmd ‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\bcb\split_ast\test.pl -db D:\ast_dataset\bcb\split_ast\files.udb’
+    # 3. run in cmd ‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\bcb\split_ast\test.pl -db D:\ast_dataset\bcb\split_ast\files.udb’
     #   生成结果在'D:\\ast_dataset\\bcb\\split_ast\\cfgs' 有一些多余的文件需要手动删掉（这一步还是9124个文件）
     #   run in cmd ‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\csn\split_ast\files\valid.pl -db D:\ast_dataset\csn\split_ast\files\valid.udb
     #   有一些多余的文件需要手动删掉后还是有多出的文件，因为有些数据不止包含一个函数（不用删掉）
 
-    # process_cfg('D:\\ast_dataset\\bcb\\split_ast\\cfgs', 'D:\\ast_dataset\\bcb\\split_ast\\files\\', 'D:\\ast_dataset\\bcb\\split_ast\\final_cfgs\\')
+    # 4. Run process_cfg function
+    # process_cfg_bcb('D:\\ast_dataset\\bcb\\split_ast\\cfgs', 'D:\\ast_dataset\\bcb\\split_ast\\files\\', 'D:\\ast_dataset\\bcb\\split_ast\\final_cfgs\\')
     # 'D:\\ast_dataset\\bcb\\split_ast\\final_cfgs\\' 中的‘img’文件夹需要手动删掉（这一步还是9124个文件）
     # process_cfg_csn('D:\\ast_dataset\\csn\\split_ast\\cfgs\\{}\\'.format(csn_file),
     #             'D:\\ast_dataset\\csn\\split_ast\\files\\{}\\'.format(csn_file),
@@ -422,24 +420,13 @@ if __name__ == "__main__":
     # 5. run dominator_tree.py  （结果在'D:\\ast_dataset\\bcb\\split_ast\\code_split\\'）
     # 部分文件会无法生成, 因为CFG有多个入口，把final_cfgs文件夹里的对应json文件里多余的入口节点（整个文件中id只出现了一次的）删掉
 
-    # 有修改，有些文件第一行不是方法名，是“@xxx”
-    add_head('D:\\ast_dataset\\bcb\\split_ast\\code_split\\', 'D:\\ast_dataset\\bcb\\func\\data.jsonl', 'D:\\ast_dataset\\bcb\\split_ast\\final_split.jsonl')
+    # 6. Run add_head function
+    add_head_bcb('D:\\ast_dataset\\bcb\\split_ast\\code_split\\', 'D:\\ast_dataset\\bcb\\func\\data.jsonl', 'D:\\ast_dataset\\bcb\\split_ast\\final_split.jsonl')
     # add_head_csn('D:\\ast_dataset\\csn\\split_ast\\code_split\\{}\\'.format(csn_file), 'D:\\ast_dataset\\csn\\original\\{}.jsonl'.format(csn_file),
     #          'D:\\ast_dataset\\csn\\split_ast\\final_split_{}.jsonl'.format(csn_file))
 
+    # 7. Run process_split_code function
     process_split_code('D:\\ast_dataset\\bcb\\split_ast\\final_split.jsonl','D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl')
     # process_split_code('D:\\ast_dataset\\csn\\split_ast\\final_split_{}.jsonl'.format(csn_file),
     #                    'D:\\ast_dataset\\csn\\split_ast\\final_split_{}_1.jsonl'.format(csn_file))
 
-    # test
-    # code = clean_code('x)xx()((()')
-    # if len(code)==0:
-    #     print('len(code)==0')
-    # else:
-    #     print(code)
-    #
-    # code = clean_head('void func(int a)')
-    # if len(code)==0:
-    #     print('len(code)==0')
-    # else:
-    #     print(code)

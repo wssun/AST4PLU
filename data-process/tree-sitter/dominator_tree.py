@@ -170,10 +170,12 @@ def get_code_blocks(cfg_path):
 
 
 if __name__ == '__main__':
+    # for bcb
     # missing file: 20685385.json, 2084427.json
     cfg_dir = 'D:\\ast_dataset\\bcb\\split_ast\\final_cfgs\\'
     code_split_dir = 'D:\\ast_dataset\\bcb\\split_ast\\code_split\\'
 
+    # for csn
     # csn_file = 'test'
     # cfg_dir = 'D:\\ast_dataset\\csn\\split_ast\\final_cfgs\\{}\\'.format(csn_file)
     # code_split_dir = 'D:\\ast_dataset\\csn\\split_ast\\code_split\\{}\\'.format(csn_file)
@@ -191,24 +193,3 @@ if __name__ == '__main__':
         for code in code_list:
             code_split_file.write('<sep>' + code)
         code_split_file.close()
-
-    # for test
-    # code_list = get_code_blocks('D:\\ast_dataset\\csn\\split_ast\\final_cfgs\\train\\15843.json')
-    # print(code_list)
-
-    # 处理有问题的json文件
-    # cfg_dir = 'D:\\ast_dataset\\csn\\split_ast\\error_final_cfgs\\train_edit\\'
-    # code_split_dir = 'D:\\ast_dataset\\csn\\split_ast\\error_code_split\\train\\'
-    # cfg_file_list = os.listdir(cfg_dir)
-    # os.chdir(cfg_dir)
-    # for cfg_path in tqdm(cfg_file_list):
-    #     try:
-    #         code_list = get_code_blocks(cfg_path)
-    #     except KeyError:
-    #         print(cfg_path)
-    #         continue
-    #     idx = cfg_path.replace('.json', '')
-    #     code_split_file = open(code_split_dir + idx + '.txt', 'w', encoding='utf-8')
-    #     for code in code_list:
-    #         code_split_file.write('<sep>' + code)
-    #     code_split_file.close()
