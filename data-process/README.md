@@ -163,8 +163,9 @@ You can follow the steps below to get Split Code.
 3. Open file ``./tree-sitter/test.pl`` and change line 54 ``open d,">D:\\ast_dataset\\bcb\\split_ast\\cfgs\\"."$code_id.txt";``.
     Replace ``D:\\ast_dataset\\bcb\\split_ast\\cfgs\\`` with ``cfg_dir``. ``cfg_dir`` is path to a directory that saves cfg files.
 
-    Run in cmd ‘D:\SciTools\bin\pc - win64 > uperl.exe {PATH_TO_test.pl} -db {PATH_TO_UDB_FILE}’
-    For example, ‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\bcb\split_ast\test.pl -db D:\ast_dataset\bcb\split_ast\files.udb’
+    Run in cmd ``‘D:\SciTools\bin\pc - win64 > uperl.exe {PATH_TO_test.pl} -db {PATH_TO_UDB_FILE}’``
+
+    For example, ``‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\bcb\split_ast\test.pl -db D:\ast_dataset\bcb\split_ast\files.udb’``
     The output is in ``cfg_dir``. There should be some extra cfg files that is not the cfg of functions in the dataset. You should delete them manually.
     TODO: add an image
 
