@@ -69,8 +69,8 @@ def remove_comments_and_docstrings(source, lang):
 
 
 
-def data2java_bcb(dataset_file, java_dir):  # txt
-    file = open(dataset_file, encoding='utf-8')
+def data2java_bcb(file_path, java_dir):  # txt
+    file = open(file_path, encoding='utf-8')
     for line in file.readlines():
         line = line.strip()
         js = json.loads(line)
@@ -92,8 +92,8 @@ def data2java_bcb(dataset_file, java_dir):  # txt
     file.close()
 
 
-def data2java_csn(dataset_file, java_dir):  # txt
-    file = open(dataset_file, encoding='utf-8')
+def data2java_csn(file_path, java_dir):  # txt
+    file = open(file_path, encoding='utf-8')
     i = 0
     for line in file.readlines():
         line = line.strip()
@@ -228,15 +228,15 @@ def process_cfg_csn(cfg_dir, java_dir, final_cfg_dir):   # read source code by l
             cfg_file.close()
 
 
-def add_head_bcb(code_split_dir, source_path, new_split_path):  # The method header is also added to the code snippet
+def add_head_bcb(code_split_dir, file_path, code_split_path):  # The method header is also added to the code snippet
     code_split_list = os.listdir(code_split_dir)
     source_code = {}
-    with open(source_path, encoding='UTF-8') as f1:
+    with open(file_path, encoding='UTF-8') as f1:
         for line in f1:
             line = line.strip()
             js = json.loads(line)
             source_code[js['idx']] = js['func']
-    new_file = open(new_split_path, 'w', encoding='utf-8')
+    new_file = open(code_split_path, 'w', encoding='utf-8')
     os.chdir(code_split_dir)
     for f in tqdm(code_split_list):
         file = open(f, encoding='utf-8')
@@ -281,11 +281,11 @@ def add_head_bcb(code_split_dir, source_path, new_split_path):  # The method hea
     new_file.close()
 
 
-def add_head_csn(code_split_dir, source_path, new_split_path):  # The method header is also added to the code snippet
-    new_file = open(new_split_path, 'w', encoding='utf-8')
+def add_head_csn(code_split_dir, file_path, code_split_path):  # The method header is also added to the code snippet
+    new_file = open(code_split_path, 'w', encoding='utf-8')
 
     idx = 0
-    with open(source_path, encoding='UTF-8') as f1:
+    with open(file_path, encoding='UTF-8') as f1:
         for line in f1:
             line = line.strip()
             js = json.loads(line)
@@ -364,8 +364,8 @@ def clean_head(head):
     return head
 
 
-def process_split_code(code_split_path, final_code_split_file):
-    final_code_split = open(final_code_split_file, 'w', encoding='utf-8')
+def process_split_code(code_split_path, final_split_path):
+    final_code_split = open(final_split_path, 'w', encoding='utf-8')
     with open(code_split_path, encoding='utf-8') as f:
         for line in f:
             line = line.strip()

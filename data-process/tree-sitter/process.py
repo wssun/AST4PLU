@@ -91,9 +91,9 @@ def process(file_path, ast_file_path, language):
 
 
 
-def process_split_ast(split_file_path, ast_file_path, language):
+def process_split_ast(final_split_path, ast_file_path, language):
     cnt = 0
-    with open(split_file_path, encoding='UTF-8') as f:
+    with open(final_split_path, encoding='UTF-8') as f:
         with open(ast_file_path, 'w', encoding='UTF-8') as f1:
             for line in f:
                 line = line.strip()
@@ -114,4 +114,4 @@ if __name__ == '__main__':
     language = 'java'
     print('start...')
     process(file_path="D:\\ast_dataset\csn\original\\train.jsonl", ast_file_path="D:\\ast_dataset\\csn\\binary_tree\\train_ast.jsonl", language=language)
-    process_split_ast(split_file_path="D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl", ast_file_path="D:\\ast_dataset\\bcb\\split_ast\\data_ast.jsonl", language=language)
+    process_split_ast(final_split_path="D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl", ast_file_path="D:\\ast_dataset\\bcb\\split_ast\\data_ast.jsonl", language=language)

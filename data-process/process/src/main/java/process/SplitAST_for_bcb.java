@@ -18,8 +18,8 @@ import utils.TreeTools;
 import tree.Test;
 
 public class SplitAST_for_bcb {
-	private static String AST_FILE_PATH="D:\\ast_dataset\\bcb\\split_ast\\example.jsonl";
-	private static String JSON_FILE_PATH="D:\\ast_dataset\\bcb\\split_ast\\example_output.jsonl";
+	private static String AST_FILE_PATH="D:\\ast_dataset\\bcb\\split_ast\\data_ast.jsonl";
+	private static String JSON_FILE_PATH="D:\\ast_dataset\\bcb\\split_ast\\data.jsonl";
 	
 	// use Tree-sitter
 	public static void main(String[] args) throws IOException {
