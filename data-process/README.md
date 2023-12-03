@@ -157,7 +157,7 @@ You can follow the steps below to get Split Code.
         data2java_bcb('D:\\ast_dataset\\bcb\\func\\data.jsonl','D:\\ast_dataset\\bcb\\split_ast\\files\\')
         data2java_csn('D:\\ast_dataset\\csn\\original\\{}.jsonl'.format(csn_file), 'D:\\ast_dataset\\csn\\split_ast\\files\\{}\\'.format(csn_file))
     ```
-2. open ``java_dir`` in ##Scitools Understand## and you will get a file with suffix ``.udb``. Suppose path to the file with suffix ``.udb`` is PATH_TO_UDB_FILE.
+2. open ``java_dir`` in **Scitools Understand** and you will get a file with suffix ``.udb``. Suppose path to the file with suffix ``.udb`` is PATH_TO_UDB_FILE.
     For example, ``PATH_TO_UDB_FILE = ‘D:\ast_dataset\bcb\split_ast\files.udb’``.
 
 3. Open file ``./tree-sitter/test.pl`` and change line 54 ``open d,">D:\\ast_dataset\\bcb\\split_ast\\cfgs\\"."$code_id.txt";``.
