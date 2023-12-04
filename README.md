@@ -39,13 +39,3 @@ Run ``evaluator.py`` in the evaluator directory.
 
 For more details, please refer to the README under each subfolder.
 
-## Reference
-If you use this code, please consider citing us. [![arXiv](https://img.shields.io/badge/arXiv-2312.00413-b31b1b.svg)](https://arxiv.org/abs/2312.00413)
-```
-@article{2023-AST4PLU,
-  title={Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?},
-  author={Weisong Sun, Chunrong Fang, Yun Miao, Yudu You, Mengzhe Yuan, Yuchen Chen, Quanjun Zhang, An Guo, Xiang Chen, Yang Liu, Zhenyu Chen},
-  journal={arXiv preprint arXiv:2312.00413},
-  year={2023}
-}
-```
