@@ -1,5 +1,13 @@
 # AST4PLU
-Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?
+**Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?**    [![arXiv](https://img.shields.io/badge/arXiv-2312.00413-b31b1b.svg)]
+```
+@article{2023-AST4PLU,
+  title={Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?},
+  author={Weisong Sun, Chunrong Fang, Yun Miao, Yudu You, Mengzhe Yuan, Yuchen Chen, Quanjun Zhang, An Guo, Xiang Chen, Yang Liu, Zhenyu Chen},
+  journal={arXiv preprint arXiv:2312.00413},
+  year={2023}
+}
+```
 
 ## Introduction
 This repository contains the implementation code for the experiments in the paper "Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?".
