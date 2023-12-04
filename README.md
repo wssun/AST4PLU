@@ -1,5 +1,6 @@
 # AST4PLU
-**Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?**    [![arXiv](https://img.shields.io/badge/arXiv-2312.00413-b31b1b.svg)]
+**Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?**    
+[![arXiv](https://img.shields.io/badge/arXiv-2312.00413-b31b1b.svg)]
 ```
 @article{2023-AST4PLU,
   title={Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?},
