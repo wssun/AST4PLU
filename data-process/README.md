@@ -188,9 +188,8 @@ You can follow the steps below to get Split Code.
     For example, you should change file ``D:\ast_dataset\csn\split_ast\final_cfgs\valid\660.json`` from
    ![image](https://github.com/wssun/AST4PLU/assets/56762513/81be38ba-584e-4e1e-9342-155a69644d32)
     to
-   ![image](https://github.com/wssun/AST4PLU/assets/56762513/2d95e35c-9125-4e5a-a337-7ace28598b88)
+   ![image](https://github.com/wssun/AST4PLU/assets/56762513/bd9840be-2c81-4594-bf01-093408c7aa3b)
 
-   
 
 8. Run ``add_head_bcb(code_split_dir, file_path, code_split_path)`` in ``./tree-sitter/split_ast.py`` where ``code_split_path`` is path to the json file that save split code.
     For example,
