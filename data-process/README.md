@@ -79,7 +79,7 @@ For example, we use ```TreeTools.getASTPath(ast, 8, 2)```, which sets maxLen=8 a
 
 # Process dataset using Tree-sitter
 First, we use Tree-sitter to generate an intermediate output, which is a sequence similar to SBT, to represent AST (This part of code is written in Python).
-Then we use the same code as JDT, SrcML and Antlr for further processing (This part of code is wwritten in java).
+Then we use the same code as JDT, SrcML and Antlr for further processing (This part of code is written in java).
 
 The former part of code is in ``./tree-sitter`` directory.
 The latter part of code is in ``./process/src/main/java/process/`` directory.
@@ -166,10 +166,12 @@ You can follow the steps below to get Split Code.
     Run in cmd ``‘D:\SciTools\bin\pc - win64 > uperl.exe {PATH_TO_test.pl} -db {PATH_TO_UDB_FILE}’``
 
     For example, ``‘D:\SciTools\bin\pc - win64 > uperl.exe D:\ast_dataset\bcb\split_ast\test.pl -db D:\ast_dataset\bcb\split_ast\files.udb’``
-    The output is in ``cfg_dir``. There should be some extra cfg files that is not the cfg of functions in the dataset. You should delete them manually.
+    The output is in ``cfg_dir``. There should be some extra cfg files that is not the cfg of functions in the dataset， such as files in the red box in the picture. You should delete them manually.
     TODO: add an image
+   ![image](https://github.com/wssun/AST4PLU/assets/56762513/326ea6e1-051a-42c8-a8d3-4faa1c7930a2)
 
-4. Run ``process_cfg(cfg_dir, java_dir, final_cfg_dir)`` in ``./tree-sitter/split_ast.py``, where ``final_cfg_dir`` is path to a directory that saves final cfg files.
+
+5. Run ``process_cfg(cfg_dir, java_dir, final_cfg_dir)`` in ``./tree-sitter/split_ast.py``, where ``final_cfg_dir`` is path to a directory that saves final cfg files.
 
     For example
     ```
@@ -181,19 +183,23 @@ You can follow the steps below to get Split Code.
 
     If there is an ``img`` directory in ``final_cfg_dir``, you should delete it manually.
 
-5. Run ``./tree-sitter/dominator_tree.py``. The result is in ``code_split_dir``, which is path to a directory that save split code.
-    There may be some files that cannot generate split_code.txt because CFG has multiple entries.
-    Delete the redundant entry nodes (if their id only appears once in the entire file) in the corresponding json file in ``final_cfgs_dir``.
-    TODO: add an example
+6. Run ``./tree-sitter/dominator_tree.py``. The result is in ``code_split_dir``, which is path to a directory that save split code.
+    There may be some files that cannot generate split_code.txt because CFG has multiple entries. In this case, you should change the final_cfg file to make sure there is only one root node and every node in ``"next_nodes"``exists in the file. This means you need to delete the **redundant** root nodes (``"id"`` of root node only appears once in the entire file) or add some extra nodes in the corresponding json file in ``final_cfgs_dir``.
+    For example, you should change file ``D:\ast_dataset\csn\split_ast\final_cfgs\valid\660.json`` from
+   ![image](https://github.com/wssun/AST4PLU/assets/56762513/81be38ba-584e-4e1e-9342-155a69644d32)
+    to
+   ![image](https://github.com/wssun/AST4PLU/assets/56762513/2d95e35c-9125-4e5a-a337-7ace28598b88)
 
-6. Run ``add_head_bcb(code_split_dir, file_path, code_split_path)`` in ``./tree-sitter/split_ast.py`` where ``code_split_path`` is path to the json file that save split code.
+   
+
+8. Run ``add_head_bcb(code_split_dir, file_path, code_split_path)`` in ``./tree-sitter/split_ast.py`` where ``code_split_path`` is path to the json file that save split code.
     For example,
     ```
         add_head_bcb('D:\\ast_dataset\\bcb\\split_ast\\code_split\\', 'D:\\ast_dataset\\bcb\\func\\data.jsonl', 'D:\\ast_dataset\\bcb\\split_ast\\final_split.jsonl')
         add_head_csn('D:\\ast_dataset\\csn\\split_ast\\code_split\\{}\\'.format(csn_file), 'D:\\ast_dataset\\csn\\original\\{}.jsonl'.format(csn_file),
                  'D:\\ast_dataset\\csn\\split_ast\\final_split_{}.jsonl'.format(csn_file))
     ```
-7. Run ``process_split_code(code_split_path, final_split_path)`` in ``./tree-sitter/split_ast.py`` where ``final_split_path`` is path to the json file that save final split code.
+9. Run ``process_split_code(code_split_path, final_split_path)`` in ``./tree-sitter/split_ast.py`` where ``final_split_path`` is path to the json file that save final split code.
     For example,
     ```
         process_split_code('D:\\ast_dataset\\bcb\\split_ast\\final_split.jsonl','D:\\ast_dataset\\bcb\\split_ast\\final_split_1.jsonl')
