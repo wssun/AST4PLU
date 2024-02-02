@@ -29,7 +29,7 @@ pytorch-geometric (used for AST-Trans) can be installed by ``pip install torch-s
 ## Data preprocess
 Please refer to the README in data-process directory.
 
-Dataset preprocessed by us can be downloaded [here](https://drive.google.com/drive/folders/12h4SrBcqW31FsP0faXuJjo0wwO7lOTW0?usp=drive_link).
+Dataset preprocessed by us can be downloaded [here](https://drive.google.com/drive/folders/12h4SrBcqW31FsP0faXuJjo0wwO7lOTW0?usp=sharing).
 
 ## Run
 Run ``run.py`` in the code directory. 
