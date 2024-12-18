@@ -9,7 +9,6 @@
   year={2023}
 }
 ```
-See ./TOSEM 2024_Supplemental Material.pdf for the supplemental material for our paper.
 
 ## Introduction
 This repository contains the implementation code for the experiments in the paper "Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?".
@@ -21,6 +20,8 @@ This repository contains the implementation code for the experiments in the pape
 **code-summarization** - Contains code for the code summarization task using BiLSTM, Transformer, Child-Sum TreeLSTM, N-ary TreeLSTM and AST-Trans.
 
 **code-search** - Contains code for the code search task using BiLSTM, Transformer, Child-Sum TreeLSTM, N-ary TreeLSTM and AST-Trans.
+
+The supplemental material of our paper is ./TOSEM 2024_Supplemental Material.pdf.
 
 ## Install environment
 pip install -r requirements.txt
