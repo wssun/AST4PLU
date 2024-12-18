@@ -9,6 +9,7 @@
   year={2023}
 }
 ```
+See ./TOSEM 2024_Supplemental Material.pdf for the supplemental material for our paper.
 
 ## Introduction
 This repository contains the implementation code for the experiments in the paper "Abstract Syntax Tree for Programming Language Understanding and Representation: How Far Are We?".
@@ -40,4 +41,3 @@ For specific parameter settings, please refer to the README under each subfolder
 Run ``evaluator.py`` in the evaluator directory. 
 
 For more details, please refer to the README under each subfolder.
-
