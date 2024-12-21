@@ -42,3 +42,6 @@ For specific parameter settings, please refer to the README under each subfolder
 Run ``evaluator.py`` in the evaluator directory. 
 
 For more details, please refer to the README under each subfolder.
+
+## Result
+Results of our experiment can be found [here](https://drive.google.com/drive/folders/1FrBcqhKpvzfwQ1ajtwqe8xqPfMsr3_w2?usp=sharing).
