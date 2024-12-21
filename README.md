@@ -39,9 +39,9 @@ Run ``run.py`` in the code directory.
 For specific parameter settings, please refer to the README under each subfolder.
 
 ## Test
-Run ``evaluator.py`` in the evaluator directory. 
+For code clone detection, run ``evaluator.py`` in the evaluator directory. 
 
-For more details, please refer to the README under each subfolder.
+For other tasks, please refer to the README under each subfolder.
 
 ## Result
 Results of our experiments can be found [here](https://drive.google.com/drive/folders/1FrBcqhKpvzfwQ1ajtwqe8xqPfMsr3_w2?usp=sharing).
